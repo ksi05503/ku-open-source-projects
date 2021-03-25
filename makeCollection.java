@@ -20,7 +20,8 @@ import javax.xml.transform.stream.StreamResult;
 
 public class makeCollection {
     public void mkCollection(File[] fileList) {
-        if (fileList.length > 0) {   // empty?
+       if (fileList.length > 0) {   // empty?
+
             int id =0;
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = null;
@@ -73,7 +74,7 @@ public class makeCollection {
                 transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
                 DOMSource source = new DOMSource(new_document);
-                StreamResult result = new StreamResult(new FileOutputStream(new File("/Users/ksi05/Desktop/openSW01/simpleIR/collection.xml")));
+                StreamResult result = new StreamResult(new FileOutputStream(new File("/Users/ksi05/Desktop/openSW01/src/main/simpleIR/collection.xml")));
                 transformer.transform(source, result);
             } catch (TransformerException | FileNotFoundException e) {
                 e.printStackTrace();

@@ -48,7 +48,7 @@ public class makeKeyword {
                 transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 
                 DOMSource source = new DOMSource (d) ;
-                StreamResult result = new StreamResult(new FileOutputStream(new File("/Users/ksi05/SimpleIR/index.xml")));
+                StreamResult result = new StreamResult(new FileOutputStream(new File("/Users/ksi05/desktop/openSW01/src/main/SimpleIR/index.xml")));
                 transformer.transform(source, result);
             } catch (TransformerConfigurationException e) {
                 e.printStackTrace();
