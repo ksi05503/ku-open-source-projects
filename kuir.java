@@ -1,8 +1,12 @@
 package main;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
+import java.io.IOException;
 
 public class kuir {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException, ClassNotFoundException {
 
 
         String arg = args[0];
@@ -27,13 +31,13 @@ public class kuir {
                 makeKeyword mk = new makeKeyword();
                 mk.mkKeyword(collection);
             }
-        }else if(arg.equals("-p")){
+        }else if(arg.equals("-i")){
             if (args[1] != null) {
-                String collection_dir = args[1];
-                File collection = new File(collection_dir);
-                System.out.println(collection_dir);
-                makePost mp = new makePost();
-                mp.mkPost(collection);
+                String index_dir = args[1];
+                indexer indexer = new indexer();
+                indexer.saveHashmap(index_dir);
+                indexer.read();
+
             }
         }
     }
