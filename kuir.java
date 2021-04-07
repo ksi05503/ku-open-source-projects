@@ -4,6 +4,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class kuir {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException, ClassNotFoundException {
@@ -39,6 +40,17 @@ public class kuir {
                 indexer.read();
 
             }
+        }else if(arg.equals("-s")) {
+            if(args.length>2 && args[2].equals("-q")) {
+                String post_dir = args[1];
+                String query = args[3];
+                searcher searcher = new searcher();
+                ArrayList<Double> sim = searcher.CalcSim(query,post_dir);
+                searcher.printTitle(sim, "/Users/ksi05/desktop/openSW01/simpleIR/collection.xml");
+            }
         }
     }
 }
+
+//javac -cp "main/libraries/*" main/*.java -encoding UTF-8
+//java -cp ".";"main/libraries/*" main/kuir -
