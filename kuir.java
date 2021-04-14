@@ -46,7 +46,7 @@ public class kuir {
                 String query = args[3];
                 searcher searcher = new searcher();
                 ArrayList<Double> sim = searcher.CalcSim(query,post_dir);
-                searcher.printTitle(sim, "/Users/ksi05/desktop/openSW01/simpleIR/collection.xml");
+                searcher.printTitle(sim, "/Users/ksi05/desktop/openSW01/src/main/simpleIR/collection.xml");
             }
         }
     }
