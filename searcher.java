@@ -15,7 +15,7 @@ import java.io.ObjectInputStream;
 import java.util.*;
 
 public class searcher {
-    public ArrayList<Double> CalcSim(String query, String post_dir) throws IOException, ClassNotFoundException {
+    public ArrayList<Double> InnerProduct(String query, String post_dir) throws IOException, ClassNotFoundException {
         KeywordExtractor ke = new KeywordExtractor();
         KeywordList kl = ke.extractKeyword(query, true);
 
