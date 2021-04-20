@@ -15,7 +15,7 @@ import java.io.ObjectInputStream;
 import java.util.*;
 
 public class searcher {
-    public ArrayList<Double> InnerProduct(String query, String post_dir) throws IOException, ClassNotFoundException {
+    public ArrayList<Double> CalcSim(String query, String post_dir) throws IOException, ClassNotFoundException {
         KeywordExtractor ke = new KeywordExtractor();
         KeywordList kl = ke.extractKeyword(query, true);
 
@@ -48,6 +48,9 @@ public class searcher {
         HashMap<Integer, String> result = new HashMap<>();
         for (int id = 0; id < 5; id++) {
             double inner_product = 0.0;
+            double size_tf = 0.0;
+            double size_weight = 0.0;
+            double cos = 0.0;
             for (String key : map_word.keySet()) {
                 String[] split_tf = map_word.get(key).split("/");
                 double tf = Double.parseDouble(split_tf[0]);
@@ -55,8 +58,17 @@ public class searcher {
                 double weight = Double.parseDouble(split_value[id].split(":")[1]);
 
                 inner_product += tf * weight;
+                size_tf += Math.pow(tf, 2);
+                size_weight += Math.pow(weight, 2);
             }
-            result.put(id, String.format("%.2f", inner_product));
+            size_tf = Math.sqrt(size_tf);
+            size_weight = Math.sqrt(size_weight);
+            cos = inner_product / (size_tf * size_weight);
+//            result.put(id, String.format("%.2f", inner_product));
+            if(Double.isNaN(cos)){
+                cos = 0;
+            }
+            result.put(id, String.format("%.2f", cos));
         }
 
         ArrayList<Double> sim = new ArrayList<>();
@@ -88,6 +100,9 @@ public class searcher {
         int c = 0;
 
         for (int i = 0; i < 3; i++) {
+            if (copy_sim.get(i) == 0){
+                continue;
+            }
             int index = sim.indexOf(copy_sim.get(i));
             if (list_index.contains(index) && c == 0) {
                 for (int j = 0; j < 5; j++) {
